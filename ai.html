@@ -95,7 +95,41 @@
             <button onclick="talkToEmoji()">Send</button>
         </div>
     </div>
+    <datalist id="hidden">
+  <option value="open google" value="Open Google" value="Open google">
+  <option value="Open YouTube" value="Open Youtube" value="Open youtube" value="open youtube">
+  <option value="Open telegram" value="open telegram">
+</datalist>
     <script>
+      const textInput = document.getElementById('user-input');
+
+  textInput.addEventListener('input', function() {
+    const val = this.value;
+    
+    // Check if the typed value matches one of your options
+    if (val === "open google") {
+      window.location.href = "https://google.com";
+    }   if (val === "Open telegram") {
+      window.location.href = "https://web.telegram.org/k/";
+    }  if (val === "open telegram") {
+      window.location.href = "https://web.telegram.org/k/";
+    }  if (val === "Open Google") {
+      window.location.href = "https://google.com";
+    }   if (val === "Open YouTube") {
+      window.location.href = "https://youtube.com";
+    }   if (val === "Open Youtube") {
+      window.location.href = "https://youtube.com";
+    }   if (val === "Open youtube") {
+      window.location.href = "https://youtube.com";
+    }   if (val === "open youtube") {
+      window.location.href = "https://youtube.com";
+    }   if (val === "default") {
+      window.location.href = "https://google.com";
+    } else if (val === "Open google") {
+      window.location.href = "https://google.com";
+    }
+    // Add more "else if" blocks for your other options here
+  });
         const emoji = document.getElementById('emoji-face');
         const responseText = document.getElementById('response-text');
         const synth = window.speechSynthesis;
