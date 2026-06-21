@@ -94,6 +94,20 @@
             <input type="text" id="user-input" placeholder="Type here...">
             <button onclick="talkToEmoji()">Send</button>
               <button id="toggleButton" onclick="toggleListening()">Start Listening</button>
+            <!-- HTML structure -->
+<button id="listen-btn">Listen</button>
+
+<!-- Minimal JavaScript for functionality -->
+<script>
+  const button = document.getElementById('listen-btn');
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+  button.addEventListener('click', () => {
+    recognition.start(); // This command tells the browser to start listening
+    console.log('Listening started...');
+  });
+</script>
+
         </div>
     </div>
     <datalist id="hidden">
@@ -166,61 +180,6 @@ if (val === "open google" || val === "Open Google" || val === "open google " || 
             "សួស្តី" : "សួស្ដីអ្នក!",
             "default": "That sounds interesting! Tell me more about it."
         };
-      let recognition = null;
-let isListening = false;
-
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-if (!SpeechRecognition) {
-  alert("Please switch to Google Chrome or Microsoft Edge!");
-} else {
-  recognition = new SpeechRecognition();
-  recognition.continuous = true;
-  recognition.interimResults = true; // Show words as you say them
-  recognition.lang = "en-US";
-
-  recognition.onresult = function(event) {
-    let interimTranscript = "";
-    
-    // Loop through results structure correctly
-    for (let i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        document.getElementById("textBox").innerHTML += event.results[i][0].transcript + " ";
-      } else {
-        interimTranscript += event.results[i][0].transcript;
-      }
-    }
-    console.log("Heard words: ", interimTranscript);
-  };
-
-  recognition.onerror = function(event) {
-    console.error("Speech error: ", event.error);
-    alert("Microphone Error: " + event.error); // This will tell you EXACTLY what's wrong!
-  };
-
-  recognition.onend = function() {
-    if (isListening) recognition.start(); // Keep alive loop
-  };
-}
-
-function toggleListening() {
-  if (!recognition) return;
-  const button = document.getElementById("toggleButton");
-
-  if (isListening) {
-    isListening = false;
-    recognition.stop();
-    button.innerText = "Start Listening";
-    button.classList.remove("active");
-  } else {
-    isListening = true;
-    // Clear box for new session
-    document.getElementById("user-input").innerText = ""; 
-    recognition.start();
-    button.innerText = "Stop Listening";
-    button.classList.add("active");
-  }
-}
         function speakAloud(text) {
             if (synth.speaking) {
                 synth.cancel();
